@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel principal</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{base :: body}">
+    <header class="page-header">
+        <div>
+            <span class="eyebrow">Resumen operativo</span>
+            <h1>Panel principal</h1>
+            <p>Vista rápida de ventas, productos e inventario.</p>
+        </div>
+        <a class="btn primary" th:href="@{/app/ventas}">Registrar venta</a>
+    </header>
+
+    <section class="stats-grid" id="dashboardStats"></section>
+
+    <section class="two-columns">
+        <article class="card">
+            <div class="section-title">
+                <h2>Productos con bajo stock</h2>
+                <span>Alertas</span>
+            </div>
+            <div id="lowStockList" class="soft-list"></div>
+        </article>
+
+        <article class="card">
+            <div class="section-title">
+                <h2>Últimas ventas</h2>
+                <span>Movimiento reciente</span>
+            </div>
+            <div id="recentSalesList" class="soft-list"></div>
+        </article>
+    </section>
+</div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

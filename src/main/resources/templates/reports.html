@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Reportes{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Análisis de la papelería</span>
+        <h1>Reportes</h1>
+        <p>Información resumida para decidir qué artículos comprar, cuáles se venden más y cuáles necesitan revisión.</p>
+    </div>
+</header>
+
+<section class="two-columns">
+    <article class="card">
+        <div class="section-title">
+            <h2>Artículos más vendidos</h2>
+            <span>Ranking por unidades</span>
+        </div>
+        {% if top_products %}
+        <div class="bar-list">
+            {% for row in top_products %}
+            <div class="bar-row">
+                <span>{{ row.name }}</span>
+                <div class="bar-track"><div class="bar-fill" style="width: {{ row.bar }}%"></div></div>
+                <strong>{{ row.units | number }} u.</strong>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty">No hay datos para mostrar.</p>
+        {% endif %}
+    </article>
+
+    <article class="card">
+        <div class="section-title">
+            <h2>Alertas de inventario</h2>
+            <span>Acción prioritaria</span>
+        </div>
+        {% if low_stock %}
+            <div class="soft-list">
+            {% for item in low_stock %}
+                <div class="soft-item alert-item">
+                    <div>
+                        <strong>{{ item.name }}</strong>
+                        <span>{{ item.status }} · stock {{ item.stock }} / mínimo {{ item.min_stock }}</span>
+                    </div>
+                    <b>Revisar</b>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty">No hay artículos en bajo stock.</p>
+        {% endif %}
+    </article>
+</section>
+
+<section class="two-columns">
+    <article class="card">
+        <div class="section-title">
+            <h2>Ventas por fecha</h2>
+            <span>Últimos 10 días con venta</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>Fecha</th><th>Unidades</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    {% for row in sales_by_day %}
+                    <tr>
+                        <td>{{ row.sale_date }}</td>
+                        <td>{{ row.units | number }}</td>
+                        <td>{{ row.total | money }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="3" class="empty">No hay ventas registradas.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="card">
+        <div class="section-title">
+            <h2>Recomendaciones de compra</h2>
+            <span>Basadas en predicción</span>
+        </div>
+        {% if recommendations %}
+            <div class="soft-list">
+            {% for item in recommendations %}
+                <div class="soft-item">
+                    <div>
+                        <strong>{{ item.name }}</strong>
+                        <span>Stock {{ item.stock }} · predicción {{ item.predicted }} unidades</span>
+                    </div>
+                    <b>Comprar {{ item.buy }}</b>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty">Por ahora el inventario cubre la demanda estimada o faltan datos históricos.</p>
+        {% endif %}
+    </article>
+</section>
+{% endblock %}

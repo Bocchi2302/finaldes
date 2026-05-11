@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ingresar · Inventario y Ventas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<main class="auth-page">
+    <section class="auth-card">
+        <div>
+            <span class="eyebrow">Acceso</span>
+            <h1>Iniciar sesión</h1>
+            <p>Entra al panel para administrar productos, ventas e inventario.</p>
+        </div>
+        <form id="loginForm" class="form-card">
+            <label>Correo</label>
+            <input type="email" name="email" placeholder="admin@inventario.com" required>
+            <label>Contraseña</label>
+            <input type="password" name="password" placeholder="Admin123*" required>
+            <button class="btn primary full" type="submit">Entrar</button>
+            <p class="muted center">Demo: admin@inventario.com / Admin123*</p>
+        </form>
+    </section>
+</main>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

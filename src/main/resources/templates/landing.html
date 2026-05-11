@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Inicio · Papelería Inteligente{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <span class="eyebrow">Proyecto de ingeniería de sistemas</span>
+        <h1>Papelería Inteligente con predicción de ventas</h1>
+        <p>
+            Plataforma web diseñada para una papelería: registra artículos escolares y de oficina, controla el stock,
+            guarda ventas y estima la demanda futura mediante regresión lineal por mínimos cuadrados.
+        </p>
+        <div class="hero-actions">
+            <a class="btn primary" href="{{ url_for('login') }}">Iniciar sesión</a>
+            <a class="btn ghost" href="{{ url_for('register') }}">Crear cuenta</a>
+        </div>
+    </div>
+    <div class="hero-card floating-card stationery-card">
+        <div class="mini-chart">
+            <span style="height:42%"></span>
+            <span style="height:55%"></span>
+            <span style="height:69%"></span>
+            <span style="height:86%"></span>
+        </div>
+        <h3>Predicción semanal</h3>
+        <p>Artículo: <strong>Cuaderno universitario</strong></p>
+        <p>Stock actual: <strong>32 unidades</strong></p>
+        <p>Demanda estimada: <strong>58 unidades</strong></p>
+        <div class="recommendation">Comprar 26 unidades</div>
+    </div>
+</section>
+
+<section class="feature-grid">
+    <article class="feature-card">
+        <strong>Ventas de papelería</strong>
+        <p>Registra ventas de cuadernos, lápices, resmas, cartulinas, marcadores y demás artículos.</p>
+    </article>
+    <article class="feature-card">
+        <strong>Inventario organizado</strong>
+        <p>Actualiza automáticamente el stock después de vender y muestra alertas cuando un artículo se agota.</p>
+    </article>
+    <article class="feature-card">
+        <strong>Predicción</strong>
+        <p>Usa métodos numéricos para estimar qué artículos se deben comprar antes de quedarse sin existencias.</p>
+    </article>
+</section>
+{% endblock %}

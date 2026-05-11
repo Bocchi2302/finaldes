@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Registro · Papelería Inteligente{% endblock %}
+{% block content %}
+<section class="auth-card">
+    <div>
+        <span class="eyebrow">Nuevo usuario</span>
+        <h1>Crear cuenta</h1>
+        <p>Registra el dueño, cajero o administrador de la papelería.</p>
+    </div>
+    <form method="post" class="form-card">
+        <label>Nombre completo</label>
+        <input type="text" name="full_name" placeholder="Nombre del encargado" required>
+        <label>Correo</label>
+        <input type="email" name="email" placeholder="correo@papeleria.com" required>
+        <label>Contraseña</label>
+        <input type="password" name="password" placeholder="Mínimo 6 caracteres" minlength="6" required>
+        <button class="btn primary full" type="submit">Crear cuenta</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Predicción{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Métodos numéricos</span>
+        <h1>Predicción de ventas</h1>
+        <p>Selecciona un artículo de la papelería para estimar la demanda de los próximos 7 días usando regresión lineal.</p>
+    </div>
+</header>
+
+<section class="card form-panel prediction-selector">
+    <form method="get" class="inline-form">
+        <label>Artículo</label>
+        <select name="product_id" required>
+            <option value="">Selecciona artículo</option>
+            {% for product in products %}
+                <option value="{{ product.id }}" {{ 'selected' if selected_product and selected_product.id == product.id else '' }}>
+                    {{ product.name }} · stock {{ product.stock }}
+                </option>
+            {% endfor %}
+        </select>
+        <button class="btn primary" type="submit">Calcular predicción</button>
+    </form>
+</section>
+
+{% if selected_product %}
+<section class="two-columns">
+    <article class="card">
+        <div class="section-title">
+            <h2>{{ selected_product.name }}</h2>
+            <span>Historial de ventas</span>
+        </div>
+        {% if history %}
+            <div class="bar-list">
+                {% set max_q = history | map(attribute='quantity') | list | max %}
+                {% for row in history %}
+                <div class="bar-row">
+                    <span>{{ row.sale_date }}</span>
+                    <div class="bar-track"><div class="bar-fill" style="width: {{ (row.quantity / max_q * 100) if max_q else 0 }}%"></div></div>
+                    <strong>{{ row.quantity | number }} u.</strong>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty">Este artículo todavía no tiene ventas registradas.</p>
+        {% endif %}
+    </article>
+
+    <article class="card prediction-card">
+        <div class="section-title">
+            <h2>Resultado</h2>
+            <span>Próximos 7 días</span>
+        </div>
+        {% if error %}
+            <div class="flash warning">{{ error }}</div>
+            <p class="muted">Registra más ventas del artículo para poder aplicar la regresión.</p>
+        {% elif prediction %}
+            <div class="formula-box">y = {{ prediction.slope }}x + {{ prediction.intercept }}</div>
+            <div class="stats-grid mini">
+                <article class="stat-card mint">
+                    <span>Stock actual</span>
+                    <strong>{{ selected_product.stock }}</strong>
+                    <small>unidades disponibles</small>
+                </article>
+                <article class="stat-card sky">
+                    <span>Demanda estimada</span>
+                    <strong>{{ prediction.total_predicted }}</strong>
+                    <small>unidades en 7 días</small>
+                </article>
+                <article class="stat-card peach">
+                    <span>Comprar</span>
+                    <strong>{{ prediction.recommended_purchase }}</strong>
+                    <small>unidades recomendadas</small>
+                </article>
+            </div>
+            <div class="recommendation big">{{ prediction.message }}</div>
+            <h3>Predicción por día</h3>
+            <div class="soft-list">
+                {% for value in prediction.next_values %}
+                <div class="soft-item">
+                    <span>Día futuro {{ loop.index }}</span>
+                    <b>{{ value }} unidades</b>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </article>
+</section>
+{% endif %}
+{% endblock %}

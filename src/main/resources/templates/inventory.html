@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Inventario{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Control operativo</span>
+        <h1>Inventario</h1>
+        <p>Consulta el stock actual de la papelería y detecta artículos agotados o por debajo del mínimo.</p>
+    </div>
+    <a class="btn ghost" href="{{ url_for('products') }}">Administrar artículos</a>
+</header>
+
+<section class="card">
+    <div class="section-title">
+        <h2>Estado de artículos</h2>
+        <span>Semáforo de inventario</span>
+    </div>
+    <div class="inventory-grid">
+        {% for product in products %}
+        <article class="inventory-card {{ product.status|lower|replace(' ', '-') }}">
+            <div>
+                <span class="pill {{ product.status|lower|replace(' ', '-') }}">{{ product.status }}</span>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.category }}</p>
+            </div>
+            <div class="stock-number">{{ product.stock }}</div>
+            <small>Stock mínimo: {{ product.min_stock }}</small>
+            {% if product.expiration_date %}<small>Vence: {{ product.expiration_date }}</small>{% endif %}
+        </article>
+        {% else %}
+        <p class="empty">No hay artículos en inventario.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

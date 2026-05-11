@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title} ?: 'Inventario y Ventas'">Inventario y Ventas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar">
+            <a class="brand" th:href="@{/app/dashboard}">
+                <span class="brand-icon">📦</span>
+                <span>
+                    <strong>Inventario</strong>
+                    <small>y Ventas</small>
+                </span>
+            </a>
+
+            <nav class="nav-menu">
+                <a class="nav-link" th:href="@{/app/dashboard}">🏠 Panel</a>
+                <a class="nav-link" th:href="@{/app/productos}">📚 Productos</a>
+                <a class="nav-link" th:href="@{/app/ventas}">🧾 Ventas</a>
+                <a class="nav-link" th:href="@{/app/inventario}">📦 Inventario</a>
+                <a class="nav-link" th:href="@{/app/reports}">📈 Reportes</a>
+            </nav>
+
+            <div class="user-card">
+                <span>Sesión</span>
+                <strong id="sessionUser">Usuario autenticado</strong>
+                <a th:href="@{/app/login}">Entrar</a>
+            </div>
+        </aside>
+
+        <main class="content">
+            <button class="menu-toggle" type="button" data-toggle-menu>☰ Menú</button>
+            <div id="appFlash" class="flash-area"></div>
+            <div th:replace="~{::body}"></div>
+        </main>
+    </div>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

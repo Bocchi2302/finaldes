@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Configuración requerida{% endblock %}
+{% block content %}
+<section class="card setup-error">
+    <span class="eyebrow">Configuración de H2</span>
+    <h1>Falta preparar la base de datos H2</h1>
+    <p>{{ error }}</p>
+    <div class="code-block">
+        <code>python scripts/download_h2.py</code><br>
+        <code>pip install -r requirements.txt</code><br>
+        <code>python app.py</code>
+    </div>
+    <p class="muted">Cuando el archivo <strong>lib/h2.jar</strong> exista, la papelería podrá crear automáticamente sus tablas.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ventas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{base :: body}">
+    <header class="page-header">
+        <div>
+            <span class="eyebrow">Movimiento comercial</span>
+            <h1>Ventas</h1>
+            <p>Las ventas descuentan inventario automáticamente.</p>
+        </div>
+    </header>
+
+    <section class="two-columns">
+        <article class="card form-panel">
+            <div class="section-title">
+                <h2>Registrar venta</h2>
+                <span>Validación de stock</span>
+            </div>
+            <form id="saleForm" class="form-grid">
+                <label>Producto</label>
+                <select name="productoId" id="saleProductSelect" required></select>
+                <label>Cantidad vendida</label>
+                <input name="cantidad" type="number" min="1" required>
+                <label>Fecha de venta</label>
+                <input name="fechaVenta" type="date">
+                <button class="btn primary full" type="submit">Guardar venta</button>
+            </form>
+        </article>
+
+        <article class="card">
+            <div class="section-title">
+                <h2>Historial reciente</h2>
+                <span>Últimas 20 ventas</span>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="salesTableBody"></tbody>
+                </table>
+            </div>
+        </article>
+    </section>
+</div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

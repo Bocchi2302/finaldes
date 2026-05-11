@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "app.jwt.secret",
+      "type": "java.lang.String",
+      "description": "Base64-encoded secret used to sign JWT tokens."
+    },
+    {
+      "name": "app.jwt.expiration",
+      "type": "java.lang.Long",
+      "description": "JWT expiration time in milliseconds."
+    }
+  ]
+}
