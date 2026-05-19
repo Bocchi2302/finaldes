@@ -1,22 +1,17 @@
-package com.example.parcial2.dto.request;
+package com.papeleria.inteligente.dto.request;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
+import java.util.List;
 
-@Getter
-@Setter
-public class VentaRequest {
+public record VentaRequest(
+        Long clienteId,
+        LocalDate fecha,
 
-    @NotNull(message = "must not be null")
-    private Long productoId;
-
-    @NotNull(message = "must not be null")
-    @Positive(message = "must be greater than 0")
-    private Integer cantidad;
-
-    private LocalDate fechaVenta;
+        @Valid
+        @NotEmpty(message = "La venta debe tener al menos un producto")
+        List<DetalleVentaRequest> detalles
+) {
 }

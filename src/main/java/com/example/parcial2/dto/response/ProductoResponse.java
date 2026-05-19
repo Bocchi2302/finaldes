@@ -1,24 +1,24 @@
-package com.example.parcial2.dto.response;
-
-import lombok.Builder;
-import lombok.Getter;
+package com.papeleria.inteligente.dto.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.List;
 
-@Getter
-@Builder
-public class ProductoResponse {
-    private Long id;
-    private String nombre;
-    private String categoria;
-    private BigDecimal precioUnitario;
-    private Integer stock;
-    private Integer stockMinimo;
-    private boolean activo;
-    private LocalDate fechaVencimiento;
-    private String estadoStock;
-    private OffsetDateTime creadoEn;
-    private OffsetDateTime actualizadoEn;
+public record ProductoResponse(
+        Long id,
+        String nombre,
+        String descripcion,
+        Long categoriaId,
+        String categoria,
+        BigDecimal precio,
+        Integer stock,
+        Integer stockMinimo,
+        Boolean activo,
+        LocalDate fechaVencimiento,
+        String estadoStock,
+        List<String> proveedores,
+        OffsetDateTime creadoEn,
+        OffsetDateTime actualizadoEn
+) {
 }

@@ -1,18 +1,14 @@
-package com.example.parcial2.dto.request;
+package com.papeleria.inteligente.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class LoginRequest {
+public record LoginRequest(
+        @Email(message = "El correo debe tener un formato válido")
+        @NotBlank(message = "El correo es obligatorio")
+        String correo,
 
-    @Email(message = "must be a well-formed email address")
-    @NotBlank(message = "must not be blank")
-    private String email;
-
-    @NotBlank(message = "must not be blank")
-    private String password;
+        @NotBlank(message = "La contraseña es obligatoria")
+        String password
+) {
 }
