@@ -1,34 +1,26 @@
-# Sistema de Gestion de Inventario y Ventas
+# Papelería Inteligente
 
-Aplicacion web desarrollada con Spring Boot para administrar productos, registrar ventas y controlar inventario con autenticacion JWT y base de datos PostgreSQL.
+Software web para una papelería pequeña o mediana con control de productos, categorías, proveedores, compras, ventas, clientes, inventario, movimientos de stock, reportes y predicción de demanda por regresión lineal.
 
-## Resumen del sistema
+## Tecnologías
 
-El sistema esta enfocado en dos roles:
-
-- `ADMIN`: puede crear, actualizar, consultar y desactivar productos, ademas de registrar y consultar ventas.
-- `EMPLEADO`: puede consultar inventario y registrar ventas.
-
-Flujo principal:
-
-`Frontend` -> `Controller` -> `Service` -> `Repository` -> `PostgreSQL`
-
-## Tecnologias
-
-- Java 17
-- Spring Boot 4
+- Java 21
+- Spring Boot 3.x
 - Spring Web
-- Spring Data JPA
-- Spring Security
-- JWT
-- Thymeleaf
+- Spring Data JPA / Hibernate
+- Spring Security 6 + JWT
+- Bean Validation
+- Thymeleaf, HTML, CSS y JavaScript
 - PostgreSQL
+- Swagger/OpenAPI con Springdoc
 - Maven
 
-## Estructura general
+## Arquitectura
+
+El proyecto quedó organizado por capas:
 
 ```text
-com.example.parcial2
+com.papeleria.inteligente
 ├── config
 ├── controller
 ├── dto
@@ -36,14 +28,51 @@ com.example.parcial2
 │   └── response
 ├── entity
 ├── exception
-│   ├── custom
-│   └── handler
 ├── mapper
 ├── repository
 ├── security
-├── service
-└── service.impl
+└── service
 ```
+
+Flujo principal:
+
+```text
+Usuario -> Thymeleaf/JS -> Controller -> Service -> Repository -> PostgreSQL
+```
+
+Los controladores reciben DTOs de entrada y devuelven DTOs de salida. Las entidades JPA no se exponen directamente por la API.
+
+## Módulos implementados
+
+| Módulo | Funcionalidad principal |
+|---|---|
+| Autenticación | Login y signup con JWT. |
+| Usuarios y roles | Roles `ADMIN` y `EMPLEADO`. |
+| Productos | Crear, consultar, actualizar y desactivar productos. |
+| Categorías | Clasificación de productos. |
+| Proveedores | Gestión de proveedores. |
+| Compras | Registro de compras y aumento automático de inventario. |
+| Ventas | Registro de ventas, validación de stock y descuento automático. |
+| Clientes | Registro de clientes frecuentes. |
+| Inventario | Consulta de stock, bajo stock, ajustes y movimientos. |
+| Reportes | Dashboard con ventas del día, ingresos del mes y productos más vendidos. |
+| Predicción | Regresión lineal por mínimos cuadrados para estimar demanda futura. |
+
+## Roles y permisos
+
+| Funcionalidad | ADMIN | EMPLEADO |
+|---|---:|---:|
+| Iniciar sesión | Sí | Sí |
+| Consultar productos | Sí | Sí |
+| Crear/editar/desactivar productos | Sí | No |
+| Consultar inventario | Sí | Sí |
+| Registrar ventas | Sí | Sí |
+| Gestionar proveedores | Sí | No |
+| Registrar compras | Sí | No |
+| Ver reportes | Sí | No |
+| Ejecutar predicción | Sí | No |
+| Ajustar inventario manualmente | Sí | No |
+
 ## Base de datos
 
 El dump completo está en:
@@ -180,63 +209,38 @@ papeleria_inteligente
 
 También crea datos iniciales de usuarios, categorías, proveedores, productos, compras, ventas y movimientos de inventario.
 
-## Modulos del sistema
+## Credenciales de prueba
 
-### Autenticacion
-- Registro de usuario.
-- Inicio de sesion con JWT.
-- Respuesta con token y rol.
+| Rol | Correo | Contraseña |
+|---|---|---|
+| ADMIN | `admin@papeleria.com` | `Admin123*` |
+| EMPLEADO | `empleado@papeleria.com` | `Empleado123*` |
 
-### Inventario
-- Alta de productos.
-- Edicion de productos.
-- Consulta de productos.
-- Desactivacion logica de productos.
-- Control de stock minimo y estado del producto.
+## Configuración
 
-### Ventas
-- Registro de ventas.
-- Descuento automatico de stock.
-- Consulta de ultimas ventas.
+Archivo principal:
 
-## Roles y permisos
+```text
+src/main/resources/application.properties
+```
 
-- `ADMIN`
-  - Puede crear, editar, consultar y desactivar productos.
-  - Puede registrar y consultar ventas.
-- `EMPLEADO`
-  - Puede consultar productos e inventario.
-  - Puede registrar y consultar ventas.
-
-## Credenciales demo
-
-Al iniciar la aplicacion se crean estos usuarios de prueba:
-
-- `admin@inventario.com` / `Admin123*`
-- `empleado@inventario.com` / `Empleado123*`
-
-## Base de datos
-
-El proyecto usa PostgreSQL. La configuracion actual esta en [src/main/resources/application.properties](src/main/resources/application.properties).
+Variables configurables:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/parcial2db
-spring.datasource.username=postgres
-spring.datasource.password=postgres
+DB_URL=jdbc:postgresql://localhost:5432/papeleria_inteligente
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+JWT_SECRET=cGFwZWxlcmlhLWludGVsaWdlbnRlLTIwMjYtc2VjcmV0LWtleS1zaXN0ZW1hLWp3dC0zMg==
+JWT_EXPIRATION=86400000
 ```
 
-### Crear la base
+## Ejecución local
 
-```sql
-CREATE DATABASE parcial2db;
-```
-
-## Como ejecutar
-
-1. Asegurate de tener PostgreSQL corriendo.
-2. Crea la base `parcial2db`.
-3. Verifica usuario y clave en `application.properties`.
-4. Ejecuta la aplicacion:
+1. Instalar Java 21.
+2. Instalar y levantar PostgreSQL.
+3. Ejecutar el dump de base de datos.
+4. Configurar usuario y contraseña de PostgreSQL en `application.properties` o variables de entorno.
+5. Ejecutar:
 
 ```bash
 ./mvnw spring-boot:run
@@ -248,180 +252,112 @@ En Windows:
 .\mvnw.cmd spring-boot:run
 ```
 
-5. Abre el front desde:
+6. Abrir:
 
 ```text
 http://localhost:8080/app/login
 ```
 
-## Frontend integrado
+Swagger:
 
-El front esta servido desde `src/main/resources/templates` y `src/main/resources/static`.
+```text
+http://localhost:8080/swagger-ui.html
+```
 
-- `templates` contiene las vistas Thymeleaf.
-- `static/css` contiene los estilos.
-- `static/js` contiene la logica que consume la API con `fetch`.
+## Endpoints principales
 
-Paginas disponibles:
+Todas las rutas REST usan el prefijo `/api/v1`.
 
-- `/` -> landing
-- `/app/login` -> login
-- `/app/dashboard` -> panel principal
-- `/app/productos` -> gestion de productos
-- `/app/inventario` -> inventario
-- `/app/ventas` -> ventas
+### Autenticación
 
-## Endpoints de autenticacion
+| Método | Ruta | Rol |
+|---|---|---|
+| POST | `/api/v1/auth/login` | Público |
+| POST | `/api/v1/auth/signup` | Público |
 
-- `POST /auth/register`
-- `POST /auth/login`
+### Productos y categorías
 
-Ejemplo de login:
+| Método | Ruta | Rol |
+|---|---|---|
+| GET | `/api/v1/productos` | ADMIN / EMPLEADO |
+| POST | `/api/v1/productos` | ADMIN |
+| PUT | `/api/v1/productos/{id}` | ADMIN |
+| DELETE | `/api/v1/productos/{id}` | ADMIN |
+| GET | `/api/v1/categorias` | ADMIN / EMPLEADO |
+| POST | `/api/v1/categorias` | ADMIN |
+
+### Inventario
+
+| Método | Ruta | Rol |
+|---|---|---|
+| GET | `/api/v1/inventario` | ADMIN / EMPLEADO |
+| GET | `/api/v1/inventario/bajo-stock` | ADMIN / EMPLEADO |
+| GET | `/api/v1/inventario/movimientos` | ADMIN / EMPLEADO |
+| POST | `/api/v1/inventario/ajustes` | ADMIN |
+
+### Ventas, compras, reportes y predicción
+
+| Método | Ruta | Rol |
+|---|---|---|
+| POST | `/api/v1/ventas` | ADMIN / EMPLEADO |
+| GET | `/api/v1/ventas` | ADMIN |
+| POST | `/api/v1/compras` | ADMIN |
+| GET | `/api/v1/compras` | ADMIN |
+| GET | `/api/v1/reportes/dashboard` | ADMIN |
+| GET | `/api/v1/predicciones/{productoId}` | ADMIN |
+
+## Ejemplo de login
 
 ```json
 {
-  "email": "admin@inventario.com",
+  "correo": "admin@papeleria.com",
   "password": "Admin123*"
 }
 ```
 
-Respuesta:
+## Ejemplo de venta
 
 ```json
 {
-  "status": "success",
-  "code": 200,
-  "message": "Inicio de sesión exitoso",
-  "data": {
-    "token": "jwt-token",
-    "expiresIn": 86400000,
-    "role": "ROLE_ADMIN",
-    "user": {
-      "id": 1,
-      "fullName": "Admin Inventario",
-      "email": "admin@inventario.com",
-      "role": "ROLE_ADMIN"
+  "clienteId": 1,
+  "fecha": "2026-05-18",
+  "detalles": [
+    {
+      "productoId": 1,
+      "cantidad": 2
     }
-  }
+  ]
 }
 ```
 
-## Endpoints de productos
-
-- `POST /productos`
-- `GET /productos`
-- `GET /productos/{id}`
-- `PUT /productos/{id}`
-- `DELETE /productos/{id}`
-- `GET /inventario`
-
-Ejemplo de request:
+## Ejemplo de compra
 
 ```json
 {
-  "nombre": "Cuaderno universitario",
-  "categoria": "Papeleria",
-  "precioUnitario": 3500,
-  "stock": 40,
-  "stockMinimo": 10,
-  "activo": true,
-  "fechaVencimiento": null
+  "proveedorId": 1,
+  "fecha": "2026-05-18",
+  "detalles": [
+    {
+      "productoId": 1,
+      "cantidad": 20,
+      "precioUnitario": 3200
+    }
+  ]
 }
 ```
 
-## Endpoints de ventas
+## Predicción de demanda
 
-- `POST /ventas`
-- `GET /ventas`
+Endpoint:
 
-Ejemplo de request:
-
-```json
-{
-  "productoId": 1,
-  "cantidad": 2,
-  "fechaVenta": "2026-05-10"
-}
+```text
+GET /api/v1/predicciones/{productoId}?dias=7
 ```
 
-## Seguridad
+El cálculo usa regresión lineal por mínimos cuadrados sobre el historial agrupado por fecha:
 
-- La API es stateless.
-- El token JWT se envia en `Authorization: Bearer <token>`.
-- Las rutas publicas son las de autenticacion y las paginas del front.
-- Las operaciones de escritura estan protegidas por rol.
-
-## Manejo de errores
-
-Las excepciones del negocio se responden con un formato consistente:
-
-```json
-{
-  "status": "error",
-  "code": 409,
-  "message": "Stock insuficiente para el producto X",
-  "errors": ["Stock insuficiente para el producto X"],
-  "timestamp": "2026-05-10T21:40:00Z",
-  "path": "/ventas"
-}
+```text
+y = mx + b
 ```
 
-## Colecciones de Postman
-
-En la carpeta `postman/` se incluyen colecciones para probar la API:
-
-- `parcial2-auth.collection.json` -> autenticacion.
-- `parcial2-crm.collection.json` -> debe renombrarse o reutilizarse para inventario/ventas.
-
-Recomendacion: si vas a seguir con esta version del proyecto, cambia la segunda coleccion a algo como `parcial2-inventario-ventas.collection.json` para que el nombre quede coherente.
-
-## Diagrama ER
-
-```mermaid
-erDiagram
-  USER {
-    BIGINT id PK
-    STRING full_name
-    STRING email UK
-    STRING password
-    ENUM role
-  }
-
-  PRODUCTO {
-    BIGINT id PK
-    STRING nombre UK
-    STRING categoria
-    DECIMAL precio_unitario
-    INT stock
-    INT stock_minimo
-    BOOLEAN activo
-    DATE fecha_vencimiento
-    DATETIME creado_en
-    DATETIME actualizado_en
-  }
-
-  VENTA {
-    BIGINT id PK
-    BIGINT producto_id FK
-    INT cantidad
-    DECIMAL precio_unitario
-    DECIMAL total
-    DATE fecha_venta
-    DATETIME registrado_en
-    BIGINT registrado_por_usuario_id FK
-  }
-
-  USER ||--o{ VENTA : registra
-  PRODUCTO ||--o{ VENTA : genera
-```
-
-## Notas de implementacion
-
-- El backend usa DTOs para entrada y salida.
-- La logica de negocio vive en los servicios.
-- La conversion entre DTO y entidad esta separada en mappers.
-- El front consume la API desde JavaScript con `fetch`.
-
-## Siguiente mejora sugerida
-
-Si quieres seguir afinando el proyecto, el siguiente paso util es renombrar la coleccion `parcial2-crm.collection.json` para que coincida con el dominio actual y agregar ejemplos reales de headers JWT en Postman.
+El sistema compara la demanda estimada contra el stock actual y devuelve una recomendación de compra.
