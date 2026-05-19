@@ -128,8 +128,8 @@ erDiagram
   }
 
   PRODUCTOS_PROVEEDORES {
-    BIGINT producto_id PK FK
-    BIGINT proveedor_id PK FK
+    BIGINT producto_id
+    BIGINT proveedor_id
   }
 
   COMPRAS {
