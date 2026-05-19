@@ -44,6 +44,141 @@ com.example.parcial2
 ├── service
 └── service.impl
 ```
+## Base de datos
+
+El dump completo está en:
+
+```text
+database/dump_papeleria_inteligente.sql
+```
+
+Diagrama ER de la base de datos:
+
+```mermaid
+erDiagram
+  USUARIOS {
+    BIGSERIAL id PK
+    VARCHAR nombre
+    VARCHAR correo
+    VARCHAR rol
+    BOOLEAN estado
+  }
+
+  CATEGORIAS {
+    BIGSERIAL id PK
+    VARCHAR nombre
+    VARCHAR descripcion
+    BOOLEAN activa
+  }
+
+  PROVEEDORES {
+    BIGSERIAL id PK
+    VARCHAR nombre
+    VARCHAR telefono
+    VARCHAR correo
+    VARCHAR direccion
+    BOOLEAN activo
+  }
+
+  CLIENTES {
+    BIGSERIAL id PK
+    VARCHAR nombre
+    VARCHAR documento
+    VARCHAR telefono
+    VARCHAR correo
+    BOOLEAN activo
+  }
+
+  PRODUCTOS {
+    BIGSERIAL id PK
+    VARCHAR nombre
+    NUMERIC precio
+    INTEGER stock
+    INTEGER stock_minimo
+    BIGINT categoria_id FK
+  }
+
+  PRODUCTOS_PROVEEDORES {
+    BIGINT producto_id PK FK
+    BIGINT proveedor_id PK FK
+  }
+
+  COMPRAS {
+    BIGSERIAL id PK
+    DATE fecha
+    NUMERIC total
+    VARCHAR estado
+    BIGINT proveedor_id FK
+    BIGINT usuario_id FK
+  }
+
+  DETALLES_COMPRA {
+    BIGSERIAL id PK
+    BIGINT compra_id FK
+    BIGINT producto_id FK
+    INTEGER cantidad
+    NUMERIC precio_unitario
+    NUMERIC subtotal
+  }
+
+  VENTAS {
+    BIGSERIAL id PK
+    DATE fecha
+    NUMERIC total
+    VARCHAR estado
+    BIGINT cliente_id FK
+    BIGINT usuario_id FK
+  }
+
+  DETALLES_VENTA {
+    BIGSERIAL id PK
+    BIGINT venta_id FK
+    BIGINT producto_id FK
+    INTEGER cantidad
+    NUMERIC precio_unitario
+    NUMERIC subtotal
+  }
+
+  MOVIMIENTOS_INVENTARIO {
+    BIGSERIAL id PK
+    VARCHAR tipo_movimiento
+    INTEGER cantidad
+    TIMESTAMPTZ fecha
+    VARCHAR motivo
+    VARCHAR referencia
+    INTEGER stock_resultante
+    BIGINT producto_id FK
+    BIGINT usuario_id FK
+  }
+
+  CATEGORIAS ||--o{ PRODUCTOS : clasifica
+  PROVEEDORES ||--o{ COMPRAS : suministra
+  USUARIOS ||--o{ COMPRAS : registra
+  COMPRAS ||--o{ DETALLES_COMPRA : incluye
+  PRODUCTOS ||--o{ DETALLES_COMPRA : detalle_de
+  CLIENTES ||--o{ VENTAS : realiza
+  USUARIOS ||--o{ VENTAS : registra
+  VENTAS ||--o{ DETALLES_VENTA : incluye
+  PRODUCTOS ||--o{ DETALLES_VENTA : detalle_de
+  PRODUCTOS ||--o{ MOVIMIENTOS_INVENTARIO : registra
+  USUARIOS ||--o{ MOVIMIENTOS_INVENTARIO : ejecuta
+  PRODUCTOS ||--o{ PRODUCTOS_PROVEEDORES : vincula
+  PROVEEDORES ||--o{ PRODUCTOS_PROVEEDORES : vincula
+```
+
+Ejecutar desde PostgreSQL con un usuario con permisos para crear bases de datos:
+
+```bash
+psql -U postgres -f database/dump_papeleria_inteligente.sql
+```
+
+El dump crea la base:
+
+```text
+papeleria_inteligente
+```
+
+También crea datos iniciales de usuarios, categorías, proveedores, productos, compras, ventas y movimientos de inventario.
 
 ## Modulos del sistema
 
