@@ -1,4 +1,4 @@
-package com.example.parcial2.entity;
+package com.papeleria.inteligente.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,6 +6,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,23 +25,36 @@ public class Producto {
     @Column(nullable = false, unique = true, length = 150)
     private String nombre;
 
-    @Column(nullable = false, length = 80)
-    private String categoria;
+    @Column(length = 255)
+    private String descripcion;
 
     @Column(nullable = false, precision = 12, scale = 2)
-    private BigDecimal precioUnitario;
+    private BigDecimal precio;
 
     @Column(nullable = false)
     private Integer stock;
 
-    @Column(nullable = false)
+    @Column(name = "stock_minimo", nullable = false)
     private Integer stockMinimo;
 
     @Column(nullable = false)
-    private boolean activo = true;
+    private Boolean activo;
 
     @Column(name = "fecha_vencimiento")
     private LocalDate fechaVencimiento;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
+
+    @Builder.Default
+    @ManyToMany
+    @JoinTable(
+            name = "productos_proveedores",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "proveedor_id")
+    )
+    private Set<Proveedor> proveedores = new LinkedHashSet<>();
 
     @Column(name = "creado_en", nullable = false)
     private OffsetDateTime creadoEn;
@@ -54,6 +69,15 @@ public class Producto {
             creadoEn = ahora;
         }
         actualizadoEn = ahora;
+        if (activo == null) {
+            activo = true;
+        }
+        if (stock == null) {
+            stock = 0;
+        }
+        if (stockMinimo == null) {
+            stockMinimo = 0;
+        }
     }
 
     @PreUpdate

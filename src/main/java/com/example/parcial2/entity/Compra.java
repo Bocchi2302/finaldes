@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ventas")
-public class Venta {
+@Table(name = "compras")
+public class Compra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,24 +32,24 @@ public class Venta {
     @Column(nullable = false, length = 30)
     private EstadoOperacion estado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "proveedor_id", nullable = false)
+    private Proveedor proveedor;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usuario_id", nullable = false)
     private User usuario;
 
     @Builder.Default
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DetalleVenta> detalles = new ArrayList<>();
+    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleCompra> detalles = new ArrayList<>();
 
     @Column(name = "creado_en", nullable = false)
     private OffsetDateTime creadoEn;
 
-    public void agregarDetalle(DetalleVenta detalle) {
+    public void agregarDetalle(DetalleCompra detalle) {
         detalles.add(detalle);
-        detalle.setVenta(this);
+        detalle.setCompra(this);
     }
 
     @PrePersist

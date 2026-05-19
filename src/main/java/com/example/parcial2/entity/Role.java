@@ -1,6 +1,6 @@
-package com.example.parcial2.entity;
+package com.papeleria.inteligente.entity;
 
 public enum Role {
-    ROLE_ADMIN,
-    ROLE_EMPLEADO
+    ADMIN,
+    EMPLEADO
 }
