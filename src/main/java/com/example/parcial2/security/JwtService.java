@@ -1,4 +1,4 @@
-package com.example.parcial2.security;
+package com.papeleria.inteligente.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,10 +17,10 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${app.jwt.secret:c2VjcmV0LXBhcGNpYWwtMjAyNi1zdXBlci1zZWNyZXQta2V5LTI0}")
+    @Value("${app.jwt.secret}")
     private String jwtSecret;
 
-    @Value("${app.jwt.expiration:86400000}")
+    @Value("${app.jwt.expiration}")
     private Long jwtExpiration;
 
     public String extractUsername(String token) {
@@ -28,13 +28,12 @@ public class JwtService {
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+        return claimsResolver.apply(extractAllClaims(token));
     }
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", userDetails.getAuthorities().stream().findFirst().orElseThrow().getAuthority());
+        claims.put("roles", userDetails.getAuthorities().stream().map(Object::toString).toList());
         return buildToken(claims, userDetails);
     }
 
@@ -43,18 +42,18 @@ public class JwtService {
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
-    public long getExpiration() {
+    public Long getExpiration() {
         return jwtExpiration;
     }
 
-    private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    private String buildToken(Map<String, Object> claims, UserDetails userDetails) {
         Date now = new Date();
-        Date expirationDate = new Date(now.getTime() + jwtExpiration);
+        Date expiration = new Date(now.getTime() + jwtExpiration);
         return Jwts.builder()
-                .claims(extraClaims)
+                .claims(claims)
                 .subject(userDetails.getUsername())
                 .issuedAt(now)
-                .expiration(expirationDate)
+                .expiration(expiration)
                 .signWith(getSigningKey())
                 .compact();
     }
