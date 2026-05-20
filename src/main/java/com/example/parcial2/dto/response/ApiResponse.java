@@ -1,16 +1,15 @@
-package com.example.parcial2.dto.response;
-
-import lombok.Builder;
-import lombok.Getter;
+package com.papeleria.inteligente.dto.response;
 
 import java.time.OffsetDateTime;
 
-@Getter
-@Builder
-public class ApiResponse<T> {
-    private final String status;
-    private final int code;
-    private final String message;
-    private final T data;
-    private final OffsetDateTime timestamp;
+public record ApiResponse<T>(
+        String status,
+        int code,
+        String message,
+        T data,
+        OffsetDateTime timestamp
+) {
+    public static <T> ApiResponse<T> success(int code, String message, T data) {
+        return new ApiResponse<>("success", code, message, data, OffsetDateTime.now());
+    }
 }

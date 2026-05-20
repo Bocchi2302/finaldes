@@ -1,12 +1,11 @@
 package com.papeleria.inteligente.dto.response;
 
-import com.papeleria.inteligente.entity.Role;
-
-public record UserResponse(
+public record ClienteResponse(
         Long id,
         String nombre,
+        String documento,
+        String telefono,
         String correo,
-        Role rol,
-        Boolean estado
+        Boolean activo
 ) {
 }

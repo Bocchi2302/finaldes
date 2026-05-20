@@ -7,16 +7,16 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public record VentaResponse(
+public record CompraResponse(
         Long id,
         LocalDate fecha,
         BigDecimal total,
         EstadoOperacion estado,
-        Long clienteId,
-        String cliente,
+        Long proveedorId,
+        String proveedor,
         Long usuarioId,
         String usuario,
-        List<DetalleVentaResponse> detalles,
+        List<DetalleCompraResponse> detalles,
         OffsetDateTime creadoEn
 ) {
 }

@@ -1,41 +1,40 @@
-package com.example.parcial2.dto.request;
+package com.papeleria.inteligente.dto.request;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
-@Getter
-@Setter
-public class ProductoRequest {
+public record ProductoRequest(
+        @NotBlank(message = "El nombre del producto es obligatorio")
+        @Size(max = 150, message = "El nombre no puede superar 150 caracteres")
+        String nombre,
 
-    @NotBlank(message = "must not be blank")
-    @Size(max = 150, message = "must be at most 150 characters")
-    private String nombre;
+        @Size(max = 255, message = "La descripción no puede superar 255 caracteres")
+        String descripcion,
 
-    @NotBlank(message = "must not be blank")
-    @Size(max = 80, message = "must be at most 80 characters")
-    private String categoria;
+        @NotNull(message = "La categoría es obligatoria")
+        Long categoriaId,
 
-    @NotNull(message = "must not be null")
-    @DecimalMin(value = "0.01", message = "must be greater than 0")
-    private BigDecimal precioUnitario;
+        @NotNull(message = "El precio es obligatorio")
+        @DecimalMin(value = "0.01", message = "El precio debe ser mayor que cero")
+        BigDecimal precio,
 
-    @NotNull(message = "must not be null")
-    @PositiveOrZero(message = "must be zero or greater")
-    private Integer stock;
+        @NotNull(message = "El stock es obligatorio")
+        @PositiveOrZero(message = "El stock no puede ser negativo")
+        Integer stock,
 
-    @NotNull(message = "must not be null")
-    @PositiveOrZero(message = "must be zero or greater")
-    private Integer stockMinimo;
+        @NotNull(message = "El stock mínimo es obligatorio")
+        @PositiveOrZero(message = "El stock mínimo no puede ser negativo")
+        Integer stockMinimo,
 
-    private Boolean activo;
-
-    private LocalDate fechaVencimiento;
+        LocalDate fechaVencimiento,
+        Boolean activo,
+        Set<Long> proveedorIds
+) {
 }
