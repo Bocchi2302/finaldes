@@ -1,4 +1,4 @@
-package com.example.parcial2.controller;
+package com.papeleria.inteligente.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,43 +16,43 @@ public class FrontendController {
         return "login";
     }
 
-    @GetMapping("/app/register")
-    public String register() {
-        return "register";
-    }
-
     @GetMapping("/app/dashboard")
     public String dashboard() {
         return "dashboard";
     }
 
     @GetMapping("/app/productos")
-    public String products() {
+    public String productos() {
         return "products";
     }
 
-    @GetMapping("/app/inventario")
-    public String inventory() {
-        return "inventory";
-    }
-
     @GetMapping("/app/ventas")
-    public String sales() {
+    public String ventas() {
         return "sales";
     }
 
-    @GetMapping("/app/reports")
-    public String reports() {
+    @GetMapping("/app/inventario")
+    public String inventario() {
+        return "inventory";
+    }
+
+    @GetMapping("/app/proveedores")
+    public String proveedores() {
+        return "suppliers";
+    }
+
+    @GetMapping("/app/compras")
+    public String compras() {
+        return "purchases";
+    }
+
+    @GetMapping("/app/reportes")
+    public String reportes() {
         return "reports";
     }
 
-    @GetMapping("/app/predictions")
-    public String predictions() {
+    @GetMapping("/app/predicciones")
+    public String predicciones() {
         return "predictions";
-    }
-
-    @GetMapping("/app/setup-error")
-    public String setupError() {
-        return "setup_error";
     }
 }
