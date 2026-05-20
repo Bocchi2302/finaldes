@@ -1,14 +1,12 @@
-package com.example.parcial2.dto.response;
+package com.papeleria.inteligente.dto.response;
 
-import com.example.parcial2.entity.Role;
-import lombok.Builder;
-import lombok.Getter;
+import com.papeleria.inteligente.entity.Role;
 
-@Getter
-@Builder
-public class UserResponse {
-    private Long id;
-    private String fullName;
-    private String email;
-    private Role role;
+public record UserResponse(
+        Long id,
+        String nombre,
+        String correo,
+        Role rol,
+        Boolean estado
+) {
 }

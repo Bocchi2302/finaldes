@@ -1,6 +1,9 @@
-package com.example.parcial2.config;
+package com.papeleria.inteligente.config;
 
-import com.example.parcial2.security.JwtAuthenticationFilter;
+import com.papeleria.inteligente.security.CustomAccessDeniedHandler;
+import com.papeleria.inteligente.security.CustomAuthenticationEntryPoint;
+import com.papeleria.inteligente.security.JwtAuthenticationFilter;
+import com.papeleria.inteligente.security.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,32 +13,35 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
+@EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final UserDetailsService userDetailsService;
-    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
-    private final org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource;
-    private final com.example.parcial2.security.CustomAuthenticationEntryPoint authenticationEntryPoint;
-    private final com.example.parcial2.security.CustomAccessDeniedHandler accessDeniedHandler;
+    private final UserDetailsServiceImpl userDetailsService;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter,
-                          UserDetailsService userDetailsService,
-                          org.springframework.security.crypto.password.PasswordEncoder passwordEncoder,
-                          org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource,
-                          com.example.parcial2.security.CustomAuthenticationEntryPoint authenticationEntryPoint,
-                          com.example.parcial2.security.CustomAccessDeniedHandler accessDeniedHandler) {
+                          UserDetailsServiceImpl userDetailsService,
+                          CustomAuthenticationEntryPoint authenticationEntryPoint,
+                          CustomAccessDeniedHandler accessDeniedHandler) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
-        this.corsConfigurationSource = corsConfigurationSource;
         this.authenticationEntryPoint = authenticationEntryPoint;
         this.accessDeniedHandler = accessDeniedHandler;
     }
@@ -43,21 +49,42 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(ex -> ex.authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler))
                 .authenticationProvider(authenticationProvider())
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
+                )
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/", "/app/**", "/css/**", "/js/**", "/images/**").permitAll()
-                    .requestMatchers("/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/h2-console/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/productos", "/productos/**", "/inventario", "/ventas", "/ventas/**").hasAnyRole("ADMIN", "EMPLEADO")
-                    .requestMatchers(HttpMethod.POST, "/ventas", "/ventas/**").hasAnyRole("ADMIN", "EMPLEADO")
-                    .requestMatchers(HttpMethod.POST, "/productos", "/productos/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.PUT, "/productos", "/productos/**").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.DELETE, "/productos", "/productos/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
-                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
+                        .requestMatchers("/", "/app/**", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/inventario/ajustes").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/v1/productos", "/api/v1/productos/**",
+                                "/api/v1/categorias", "/api/v1/categorias/**",
+                                "/api/v1/inventario", "/api/v1/inventario/**").hasAnyRole("ADMIN", "EMPLEADO")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/ventas").hasAnyRole("ADMIN", "EMPLEADO")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/ventas", "/api/v1/ventas/**").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/api/v1/reportes", "/api/v1/reportes/**",
+                                "/api/v1/predicciones", "/api/v1/predicciones/**",
+                                "/api/v1/compras", "/api/v1/compras/**",
+                                "/api/v1/proveedores", "/api/v1/proveedores/**",
+                                "/api/v1/clientes", "/api/v1/clientes/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,
+                                "/api/v1/productos", "/api/v1/productos/**",
+                                "/api/v1/categorias", "/api/v1/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,
+                                "/api/v1/productos", "/api/v1/productos/**",
+                                "/api/v1/categorias", "/api/v1/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/api/v1/productos", "/api/v1/productos/**",
+                                "/api/v1/categorias", "/api/v1/categorias/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -65,13 +92,31 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder);
-        return authProvider;
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setExposedHeaders(List.of("Authorization"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

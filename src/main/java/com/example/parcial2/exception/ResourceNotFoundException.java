@@ -1,4 +1,4 @@
-package com.example.parcial2.exception.custom;
+package com.papeleria.inteligente.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

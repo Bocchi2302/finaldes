@@ -1,23 +1,22 @@
-package com.example.parcial2.dto.request;
+package com.papeleria.inteligente.dto.request;
 
+import com.papeleria.inteligente.entity.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class RegisterRequest {
+public record RegisterRequest(
+        @NotBlank(message = "El nombre es obligatorio")
+        String nombre,
 
-    @NotBlank(message = "must not be blank")
-    private String fullName;
+        @Email(message = "El correo debe tener un formato válido")
+        @NotBlank(message = "El correo es obligatorio")
+        String correo,
 
-    @Email(message = "must be a well-formed email address")
-    @NotBlank(message = "must not be blank")
-    private String email;
+        @Size(min = 8, message = "La contraseña debe tener mínimo 8 caracteres")
+        @NotBlank(message = "La contraseña es obligatoria")
+        String password,
 
-    @Size(min = 8, message = "must have at least 8 characters")
-    @NotBlank(message = "must not be blank")
-    private String password;
+        Role rol
+) {
 }

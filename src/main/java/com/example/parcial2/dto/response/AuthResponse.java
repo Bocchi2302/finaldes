@@ -1,14 +1,11 @@
-package com.example.parcial2.dto.response;
+package com.papeleria.inteligente.dto.response;
 
-import com.example.parcial2.entity.Role;
-import lombok.Builder;
-import lombok.Getter;
+import com.papeleria.inteligente.entity.Role;
 
-@Getter
-@Builder
-public class AuthResponse {
-    private String token;
-    private Long expiresIn;
-    private Role role;
-    private UserResponse user;
+public record AuthResponse(
+        String token,
+        Long expiresIn,
+        Role rol,
+        UserResponse usuario
+) {
 }

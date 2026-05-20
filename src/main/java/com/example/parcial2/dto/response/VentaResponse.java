@@ -1,23 +1,22 @@
-package com.example.parcial2.dto.response;
+package com.papeleria.inteligente.dto.response;
 
-import lombok.Builder;
-import lombok.Getter;
+import com.papeleria.inteligente.entity.EstadoOperacion;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.List;
 
-@Getter
-@Builder
-public class VentaResponse {
-    private Long id;
-    private Long productoId;
-    private String productoNombre;
-    private Integer cantidad;
-    private BigDecimal precioUnitario;
-    private BigDecimal total;
-    private LocalDate fechaVenta;
-    private OffsetDateTime registradoEn;
-    private Long registradoPorId;
-    private String registradoPorNombre;
+public record VentaResponse(
+        Long id,
+        LocalDate fecha,
+        BigDecimal total,
+        EstadoOperacion estado,
+        Long clienteId,
+        String cliente,
+        Long usuarioId,
+        String usuario,
+        List<DetalleVentaResponse> detalles,
+        OffsetDateTime creadoEn
+) {
 }

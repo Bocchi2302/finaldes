@@ -1,4 +1,4 @@
-package com.example.parcial2.entity;
+package com.papeleria.inteligente.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,6 +6,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,36 +22,49 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "producto_id", nullable = false)
-    private Producto producto;
-
     @Column(nullable = false)
-    private Integer cantidad;
-
-    @Column(name = "precio_unitario", nullable = false, precision = 12, scale = 2)
-    private BigDecimal precioUnitario;
+    private LocalDate fecha;
 
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal total;
 
-    @Column(name = "fecha_venta", nullable = false)
-    private LocalDate fechaVenta;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private EstadoOperacion estado;
 
-    @Column(name = "registrado_en", nullable = false)
-    private OffsetDateTime registradoEn;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "registrado_por_usuario_id", nullable = false)
-    private User registradoPor;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private User usuario;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleVenta> detalles = new ArrayList<>();
+
+    @Column(name = "creado_en", nullable = false)
+    private OffsetDateTime creadoEn;
+
+    public void agregarDetalle(DetalleVenta detalle) {
+        detalles.add(detalle);
+        detalle.setVenta(this);
+    }
 
     @PrePersist
     void prePersist() {
-        if (registradoEn == null) {
-            registradoEn = OffsetDateTime.now();
+        if (fecha == null) {
+            fecha = LocalDate.now();
         }
-        if (fechaVenta == null) {
-            fechaVenta = LocalDate.now();
+        if (estado == null) {
+            estado = EstadoOperacion.REGISTRADA;
+        }
+        if (total == null) {
+            total = BigDecimal.ZERO;
+        }
+        if (creadoEn == null) {
+            creadoEn = OffsetDateTime.now();
         }
     }
 }
