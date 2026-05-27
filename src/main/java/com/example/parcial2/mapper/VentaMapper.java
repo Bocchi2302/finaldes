@@ -1,10 +1,10 @@
-package com.papeleria.inteligente.mapper;
+package com.example.parcial2.mapper;
 
-import com.papeleria.inteligente.dto.response.DetalleVentaResponse;
-import com.papeleria.inteligente.dto.response.VentaResponse;
-import com.papeleria.inteligente.entity.Cliente;
-import com.papeleria.inteligente.entity.DetalleVenta;
-import com.papeleria.inteligente.entity.Venta;
+import com.example.parcial2.dto.response.DetalleVentaResponse;
+import com.example.parcial2.dto.response.VentaResponse;
+import com.example.parcial2.entity.Cliente;
+import com.example.parcial2.entity.DetalleVenta;
+import com.example.parcial2.entity.Venta;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

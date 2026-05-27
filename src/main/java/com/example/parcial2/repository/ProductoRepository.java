@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.repository;
+package com.example.parcial2.repository;
 
-import com.papeleria.inteligente.entity.Producto;
+import com.example.parcial2.entity.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

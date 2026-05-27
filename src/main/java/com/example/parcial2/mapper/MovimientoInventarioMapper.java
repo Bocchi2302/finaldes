@@ -1,7 +1,7 @@
-package com.papeleria.inteligente.mapper;
+package com.example.parcial2.mapper;
 
-import com.papeleria.inteligente.dto.response.MovimientoInventarioResponse;
-import com.papeleria.inteligente.entity.MovimientoInventario;
+import com.example.parcial2.dto.response.MovimientoInventarioResponse;
+import com.example.parcial2.entity.MovimientoInventario;
 import org.springframework.stereotype.Component;
 
 @Component

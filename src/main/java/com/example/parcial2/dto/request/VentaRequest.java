@@ -1,4 +1,4 @@
-package com.papeleria.inteligente.dto.request;
+package com.example.parcial2.dto.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;

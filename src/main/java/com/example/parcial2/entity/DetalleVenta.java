@@ -1,4 +1,4 @@
-package com.papeleria.inteligente.entity;
+package com.example.parcial2.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

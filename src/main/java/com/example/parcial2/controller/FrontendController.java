@@ -1,4 +1,4 @@
-package com.papeleria.inteligente.controller;
+package com.example.parcial2.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
