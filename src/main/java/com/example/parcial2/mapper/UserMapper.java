@@ -1,7 +1,7 @@
-package com.papeleria.inteligente.mapper;
+package com.example.parcial2.mapper;
 
-import com.papeleria.inteligente.dto.response.UserResponse;
-import com.papeleria.inteligente.entity.User;
+import com.example.parcial2.dto.response.UserResponse;
+import com.example.parcial2.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component

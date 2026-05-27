@@ -1,9 +1,9 @@
-package com.papeleria.inteligente.controller;
+package com.example.parcial2.controller;
 
-import com.papeleria.inteligente.dto.request.VentaRequest;
-import com.papeleria.inteligente.dto.response.ApiResponse;
-import com.papeleria.inteligente.dto.response.VentaResponse;
-import com.papeleria.inteligente.service.VentaService;
+import com.example.parcial2.dto.request.VentaRequest;
+import com.example.parcial2.dto.response.ApiResponse;
+import com.example.parcial2.dto.response.VentaResponse;
+import com.example.parcial2.service.VentaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

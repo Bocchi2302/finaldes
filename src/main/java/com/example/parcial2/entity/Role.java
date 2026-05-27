@@ -1,4 +1,4 @@
-package com.papeleria.inteligente.entity;
+package com.example.parcial2.entity;
 
 public enum Role {
     ADMIN,

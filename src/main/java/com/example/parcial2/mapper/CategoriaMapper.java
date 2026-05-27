@@ -1,8 +1,8 @@
-package com.papeleria.inteligente.mapper;
+package com.example.parcial2.mapper;
 
-import com.papeleria.inteligente.dto.request.CategoriaRequest;
-import com.papeleria.inteligente.dto.response.CategoriaResponse;
-import com.papeleria.inteligente.entity.Categoria;
+import com.example.parcial2.dto.request.CategoriaRequest;
+import com.example.parcial2.dto.response.CategoriaResponse;
+import com.example.parcial2.entity.Categoria;
 import org.springframework.stereotype.Component;
 
 @Component

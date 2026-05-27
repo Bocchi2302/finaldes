@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.dto.request;
+package com.example.parcial2.dto.request;
 
-import com.papeleria.inteligente.entity.Role;
+import com.example.parcial2.entity.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

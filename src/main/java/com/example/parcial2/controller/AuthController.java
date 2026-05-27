@@ -1,10 +1,10 @@
-package com.papeleria.inteligente.controller;
+package com.example.parcial2.controller;
 
-import com.papeleria.inteligente.dto.request.LoginRequest;
-import com.papeleria.inteligente.dto.request.RegisterRequest;
-import com.papeleria.inteligente.dto.response.ApiResponse;
-import com.papeleria.inteligente.dto.response.AuthResponse;
-import com.papeleria.inteligente.service.AuthService;
+import com.example.parcial2.dto.request.LoginRequest;
+import com.example.parcial2.dto.request.RegisterRequest;
+import com.example.parcial2.dto.response.ApiResponse;
+import com.example.parcial2.dto.response.AuthResponse;
+import com.example.parcial2.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

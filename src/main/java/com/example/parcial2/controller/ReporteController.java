@@ -1,9 +1,9 @@
-package com.papeleria.inteligente.controller;
+package com.example.parcial2.controller;
 
-import com.papeleria.inteligente.dto.response.ApiResponse;
-import com.papeleria.inteligente.dto.response.DashboardResponse;
-import com.papeleria.inteligente.dto.response.ProductoMasVendidoResponse;
-import com.papeleria.inteligente.service.ReporteService;
+import com.example.parcial2.dto.response.ApiResponse;
+import com.example.parcial2.dto.response.DashboardResponse;
+import com.example.parcial2.dto.response.ProductoMasVendidoResponse;
+import com.example.parcial2.service.ReporteService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

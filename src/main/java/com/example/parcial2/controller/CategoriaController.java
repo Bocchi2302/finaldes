@@ -1,9 +1,9 @@
-package com.papeleria.inteligente.controller;
+package com.example.parcial2.controller;
 
-import com.papeleria.inteligente.dto.request.CategoriaRequest;
-import com.papeleria.inteligente.dto.response.ApiResponse;
-import com.papeleria.inteligente.dto.response.CategoriaResponse;
-import com.papeleria.inteligente.service.CategoriaService;
+import com.example.parcial2.dto.request.CategoriaRequest;
+import com.example.parcial2.dto.response.ApiResponse;
+import com.example.parcial2.dto.response.CategoriaResponse;
+import com.example.parcial2.service.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

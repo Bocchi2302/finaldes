@@ -20,7 +20,7 @@ Software web para una papelería pequeña o mediana con control de productos, ca
 El proyecto quedó organizado por capas:
 
 ```text
-com.papeleria.inteligente
+com.example.parcial2
 ├── config
 ├── controller
 ├── dto

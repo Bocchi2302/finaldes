@@ -1,4 +1,4 @@
-package com.papeleria.inteligente.dto.request;
+package com.example.parcial2.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -1,10 +1,10 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.response.HistorialPrediccionResponse;
-import com.papeleria.inteligente.dto.response.PrediccionResponse;
-import com.papeleria.inteligente.entity.DetalleVenta;
-import com.papeleria.inteligente.entity.Producto;
-import com.papeleria.inteligente.repository.DetalleVentaRepository;
+import com.example.parcial2.dto.response.HistorialPrediccionResponse;
+import com.example.parcial2.dto.response.PrediccionResponse;
+import com.example.parcial2.entity.DetalleVenta;
+import com.example.parcial2.entity.Producto;
+import com.example.parcial2.repository.DetalleVentaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.repository;
+package com.example.parcial2.repository;
 
-import com.papeleria.inteligente.entity.DetalleVenta;
+import com.example.parcial2.entity.DetalleVenta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +15,7 @@ public interface DetalleVentaRepository extends JpaRepository<DetalleVenta, Long
             from DetalleVenta d
             join fetch d.venta v
             join fetch d.producto p
-            where p.id = :productoId and v.estado = com.papeleria.inteligente.entity.EstadoOperacion.REGISTRADA
+            where p.id = :productoId and v.estado = com.example.parcial2.entity.EstadoOperacion.REGISTRADA
             order by v.fecha asc
             """)
     List<DetalleVenta> findHistorialProducto(@Param("productoId") Long productoId);
@@ -25,7 +25,7 @@ public interface DetalleVentaRepository extends JpaRepository<DetalleVenta, Long
             from DetalleVenta d
             join fetch d.venta v
             join fetch d.producto p
-            where v.fecha between :desde and :hasta and v.estado = com.papeleria.inteligente.entity.EstadoOperacion.REGISTRADA
+            where v.fecha between :desde and :hasta and v.estado = com.example.parcial2.entity.EstadoOperacion.REGISTRADA
             """)
     List<DetalleVenta> findDetallesByFechaBetween(@Param("desde") LocalDate desde, @Param("hasta") LocalDate hasta);
 }

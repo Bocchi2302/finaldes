@@ -1,7 +1,7 @@
-package com.papeleria.inteligente.config;
+package com.example.parcial2.config;
 
-import com.papeleria.inteligente.entity.*;
-import com.papeleria.inteligente.repository.*;
+import com.example.parcial2.entity.*;
+import com.example.parcial2.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

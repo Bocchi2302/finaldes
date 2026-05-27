@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.dto.response;
+package com.example.parcial2.dto.response;
 
-import com.papeleria.inteligente.entity.TipoMovimiento;
+import com.example.parcial2.entity.TipoMovimiento;
 
 import java.time.OffsetDateTime;
 

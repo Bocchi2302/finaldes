@@ -1,12 +1,12 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.request.ProveedorRequest;
-import com.papeleria.inteligente.dto.response.ProveedorResponse;
-import com.papeleria.inteligente.entity.Proveedor;
-import com.papeleria.inteligente.exception.DuplicateResourceException;
-import com.papeleria.inteligente.exception.ResourceNotFoundException;
-import com.papeleria.inteligente.mapper.ProveedorMapper;
-import com.papeleria.inteligente.repository.ProveedorRepository;
+import com.example.parcial2.dto.request.ProveedorRequest;
+import com.example.parcial2.dto.response.ProveedorResponse;
+import com.example.parcial2.entity.Proveedor;
+import com.example.parcial2.exception.DuplicateResourceException;
+import com.example.parcial2.exception.ResourceNotFoundException;
+import com.example.parcial2.mapper.ProveedorMapper;
+import com.example.parcial2.repository.ProveedorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.repository;
+package com.example.parcial2.repository;
 
-import com.papeleria.inteligente.entity.Venta;
+import com.example.parcial2.entity.Venta;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
