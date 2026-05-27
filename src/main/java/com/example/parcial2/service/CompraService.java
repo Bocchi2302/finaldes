@@ -1,12 +1,12 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.request.CompraRequest;
-import com.papeleria.inteligente.dto.request.DetalleCompraRequest;
-import com.papeleria.inteligente.dto.response.CompraResponse;
-import com.papeleria.inteligente.entity.*;
-import com.papeleria.inteligente.mapper.CompraMapper;
-import com.papeleria.inteligente.repository.CompraRepository;
-import com.papeleria.inteligente.repository.ProductoRepository;
+import com.example.parcial2.dto.request.CompraRequest;
+import com.example.parcial2.dto.request.DetalleCompraRequest;
+import com.example.parcial2.dto.response.CompraResponse;
+import com.example.parcial2.entity.*;
+import com.example.parcial2.mapper.CompraMapper;
+import com.example.parcial2.repository.CompraRepository;
+import com.example.parcial2.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

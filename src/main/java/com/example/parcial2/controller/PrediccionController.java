@@ -1,8 +1,8 @@
-package com.papeleria.inteligente.controller;
+package com.example.parcial2.controller;
 
-import com.papeleria.inteligente.dto.response.ApiResponse;
-import com.papeleria.inteligente.dto.response.PrediccionResponse;
-import com.papeleria.inteligente.service.PrediccionService;
+import com.example.parcial2.dto.response.ApiResponse;
+import com.example.parcial2.dto.response.PrediccionResponse;
+import com.example.parcial2.service.PrediccionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

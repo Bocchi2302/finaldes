@@ -1,13 +1,13 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.request.DetalleVentaRequest;
-import com.papeleria.inteligente.dto.request.VentaRequest;
-import com.papeleria.inteligente.dto.response.VentaResponse;
-import com.papeleria.inteligente.entity.*;
-import com.papeleria.inteligente.exception.InsufficientStockException;
-import com.papeleria.inteligente.mapper.VentaMapper;
-import com.papeleria.inteligente.repository.ProductoRepository;
-import com.papeleria.inteligente.repository.VentaRepository;
+import com.example.parcial2.dto.request.DetalleVentaRequest;
+import com.example.parcial2.dto.request.VentaRequest;
+import com.example.parcial2.dto.response.VentaResponse;
+import com.example.parcial2.entity.*;
+import com.example.parcial2.exception.InsufficientStockException;
+import com.example.parcial2.mapper.VentaMapper;
+import com.example.parcial2.repository.ProductoRepository;
+import com.example.parcial2.repository.VentaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

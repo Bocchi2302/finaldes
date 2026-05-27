@@ -1,14 +1,14 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.request.LoginRequest;
-import com.papeleria.inteligente.dto.request.RegisterRequest;
-import com.papeleria.inteligente.dto.response.AuthResponse;
-import com.papeleria.inteligente.entity.Role;
-import com.papeleria.inteligente.entity.User;
-import com.papeleria.inteligente.exception.DuplicateResourceException;
-import com.papeleria.inteligente.mapper.UserMapper;
-import com.papeleria.inteligente.repository.UserRepository;
-import com.papeleria.inteligente.security.JwtService;
+import com.example.parcial2.dto.request.LoginRequest;
+import com.example.parcial2.dto.request.RegisterRequest;
+import com.example.parcial2.dto.response.AuthResponse;
+import com.example.parcial2.entity.Role;
+import com.example.parcial2.entity.User;
+import com.example.parcial2.exception.DuplicateResourceException;
+import com.example.parcial2.mapper.UserMapper;
+import com.example.parcial2.repository.UserRepository;
+import com.example.parcial2.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

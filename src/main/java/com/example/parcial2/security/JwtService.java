@@ -1,4 +1,4 @@
-package com.papeleria.inteligente.security;
+package com.example.parcial2.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

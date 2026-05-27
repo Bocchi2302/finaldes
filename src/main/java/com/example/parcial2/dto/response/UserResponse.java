@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.dto.response;
+package com.example.parcial2.dto.response;
 
-import com.papeleria.inteligente.entity.Role;
+import com.example.parcial2.entity.Role;
 
 public record UserResponse(
         Long id,

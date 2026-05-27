@@ -4,7 +4,7 @@ El proyecto original estaba centrado en productos y ventas simples. La refactori
 
 ## Cambios principales
 
-1. Se cambió el paquete base a `com.papeleria.inteligente`.
+1. Se cambió el paquete base a `com.example.parcial2`.
 2. Se actualizó el proyecto a Java 21 y Spring Boot 3.x.
 3. Se organizó el backend por capas: controladores, servicios, repositorios, entidades, DTOs, mappers y seguridad.
 4. Se agregaron entidades para categorías, proveedores, clientes, compras, detalles de compra, ventas con detalles y movimientos de inventario.

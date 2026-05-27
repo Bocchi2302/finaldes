@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.exception;
+package com.example.parcial2.exception;
 
-import com.papeleria.inteligente.dto.response.ApiErrorResponse;
+import com.example.parcial2.dto.response.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

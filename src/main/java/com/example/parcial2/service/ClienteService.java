@@ -1,12 +1,12 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.request.ClienteRequest;
-import com.papeleria.inteligente.dto.response.ClienteResponse;
-import com.papeleria.inteligente.entity.Cliente;
-import com.papeleria.inteligente.exception.DuplicateResourceException;
-import com.papeleria.inteligente.exception.ResourceNotFoundException;
-import com.papeleria.inteligente.mapper.ClienteMapper;
-import com.papeleria.inteligente.repository.ClienteRepository;
+import com.example.parcial2.dto.request.ClienteRequest;
+import com.example.parcial2.dto.response.ClienteResponse;
+import com.example.parcial2.entity.Cliente;
+import com.example.parcial2.exception.DuplicateResourceException;
+import com.example.parcial2.exception.ResourceNotFoundException;
+import com.example.parcial2.mapper.ClienteMapper;
+import com.example.parcial2.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.dto.request;
+package com.example.parcial2.dto.request;
 
-import com.papeleria.inteligente.entity.TipoMovimiento;
+import com.example.parcial2.entity.TipoMovimiento;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

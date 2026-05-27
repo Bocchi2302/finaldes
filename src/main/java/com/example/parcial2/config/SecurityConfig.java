@@ -1,9 +1,6 @@
-package com.papeleria.inteligente.config;
+package com.example.parcial2.config;
 
-import com.papeleria.inteligente.security.CustomAccessDeniedHandler;
-import com.papeleria.inteligente.security.CustomAuthenticationEntryPoint;
-import com.papeleria.inteligente.security.JwtAuthenticationFilter;
-import com.papeleria.inteligente.security.UserDetailsServiceImpl;
+import com.example.parcial2.security.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

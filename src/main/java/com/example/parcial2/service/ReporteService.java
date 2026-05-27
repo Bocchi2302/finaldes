@@ -1,13 +1,13 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.response.DashboardResponse;
-import com.papeleria.inteligente.dto.response.ProductoMasVendidoResponse;
-import com.papeleria.inteligente.entity.DetalleVenta;
-import com.papeleria.inteligente.entity.Venta;
-import com.papeleria.inteligente.mapper.ProductoMapper;
-import com.papeleria.inteligente.repository.DetalleVentaRepository;
-import com.papeleria.inteligente.repository.ProductoRepository;
-import com.papeleria.inteligente.repository.VentaRepository;
+import com.example.parcial2.dto.response.DashboardResponse;
+import com.example.parcial2.dto.response.ProductoMasVendidoResponse;
+import com.example.parcial2.entity.DetalleVenta;
+import com.example.parcial2.entity.Venta;
+import com.example.parcial2.mapper.ProductoMapper;
+import com.example.parcial2.repository.DetalleVentaRepository;
+import com.example.parcial2.repository.ProductoRepository;
+import com.example.parcial2.repository.VentaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

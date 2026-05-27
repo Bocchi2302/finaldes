@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.security;
+package com.example.parcial2.security;
 
-import com.papeleria.inteligente.repository.UserRepository;
+import com.example.parcial2.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,15 +1,15 @@
-package com.papeleria.inteligente.service;
+package com.example.parcial2.service;
 
-import com.papeleria.inteligente.dto.request.AjusteInventarioRequest;
-import com.papeleria.inteligente.dto.response.MovimientoInventarioResponse;
-import com.papeleria.inteligente.entity.MovimientoInventario;
-import com.papeleria.inteligente.entity.Producto;
-import com.papeleria.inteligente.entity.TipoMovimiento;
-import com.papeleria.inteligente.entity.User;
-import com.papeleria.inteligente.exception.BusinessRuleException;
-import com.papeleria.inteligente.mapper.MovimientoInventarioMapper;
-import com.papeleria.inteligente.repository.MovimientoInventarioRepository;
-import com.papeleria.inteligente.repository.ProductoRepository;
+import com.example.parcial2.dto.request.AjusteInventarioRequest;
+import com.example.parcial2.dto.response.MovimientoInventarioResponse;
+import com.example.parcial2.entity.MovimientoInventario;
+import com.example.parcial2.entity.Producto;
+import com.example.parcial2.entity.TipoMovimiento;
+import com.example.parcial2.entity.User;
+import com.example.parcial2.exception.BusinessRuleException;
+import com.example.parcial2.mapper.MovimientoInventarioMapper;
+import com.example.parcial2.repository.MovimientoInventarioRepository;
+import com.example.parcial2.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

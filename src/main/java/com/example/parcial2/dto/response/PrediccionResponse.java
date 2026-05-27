@@ -1,4 +1,4 @@
-package com.papeleria.inteligente.dto.response;
+package com.example.parcial2.dto.response;
 
 import java.math.BigDecimal;
 import java.util.List;

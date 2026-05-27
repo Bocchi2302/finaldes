@@ -1,6 +1,6 @@
-package com.papeleria.inteligente.dto.response;
+package com.example.parcial2.dto.response;
 
-import com.papeleria.inteligente.entity.EstadoOperacion;
+import com.example.parcial2.entity.EstadoOperacion;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

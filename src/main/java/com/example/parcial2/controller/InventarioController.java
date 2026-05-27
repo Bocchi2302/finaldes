@@ -1,11 +1,11 @@
-package com.papeleria.inteligente.controller;
+package com.example.parcial2.controller;
 
-import com.papeleria.inteligente.dto.request.AjusteInventarioRequest;
-import com.papeleria.inteligente.dto.response.ApiResponse;
-import com.papeleria.inteligente.dto.response.MovimientoInventarioResponse;
-import com.papeleria.inteligente.dto.response.ProductoResponse;
-import com.papeleria.inteligente.service.MovimientoInventarioService;
-import com.papeleria.inteligente.service.ProductoService;
+import com.example.parcial2.dto.request.AjusteInventarioRequest;
+import com.example.parcial2.dto.response.ApiResponse;
+import com.example.parcial2.dto.response.MovimientoInventarioResponse;
+import com.example.parcial2.dto.response.ProductoResponse;
+import com.example.parcial2.service.MovimientoInventarioService;
+import com.example.parcial2.service.ProductoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

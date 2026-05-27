@@ -1,10 +1,10 @@
-package com.papeleria.inteligente.mapper;
+package com.example.parcial2.mapper;
 
-import com.papeleria.inteligente.dto.request.ProductoRequest;
-import com.papeleria.inteligente.dto.response.ProductoResponse;
-import com.papeleria.inteligente.entity.Categoria;
-import com.papeleria.inteligente.entity.Producto;
-import com.papeleria.inteligente.entity.Proveedor;
+import com.example.parcial2.dto.request.ProductoRequest;
+import com.example.parcial2.dto.response.ProductoResponse;
+import com.example.parcial2.entity.Categoria;
+import com.example.parcial2.entity.Producto;
+import com.example.parcial2.entity.Proveedor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;

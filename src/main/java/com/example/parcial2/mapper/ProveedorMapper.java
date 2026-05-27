@@ -1,8 +1,8 @@
-package com.papeleria.inteligente.mapper;
+package com.example.parcial2.mapper;
 
-import com.papeleria.inteligente.dto.request.ProveedorRequest;
-import com.papeleria.inteligente.dto.response.ProveedorResponse;
-import com.papeleria.inteligente.entity.Proveedor;
+import com.example.parcial2.dto.request.ProveedorRequest;
+import com.example.parcial2.dto.response.ProveedorResponse;
+import com.example.parcial2.entity.Proveedor;
 import org.springframework.stereotype.Component;
 
 @Component

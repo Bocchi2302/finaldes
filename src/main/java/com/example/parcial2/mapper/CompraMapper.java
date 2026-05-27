@@ -1,9 +1,9 @@
-package com.papeleria.inteligente.mapper;
+package com.example.parcial2.mapper;
 
-import com.papeleria.inteligente.dto.response.CompraResponse;
-import com.papeleria.inteligente.dto.response.DetalleCompraResponse;
-import com.papeleria.inteligente.entity.Compra;
-import com.papeleria.inteligente.entity.DetalleCompra;
+import com.example.parcial2.dto.response.CompraResponse;
+import com.example.parcial2.dto.response.DetalleCompraResponse;
+import com.example.parcial2.entity.Compra;
+import com.example.parcial2.entity.DetalleCompra;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
