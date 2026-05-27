@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compras · Papelería Inteligente</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body data-page="purchases">
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <a class="brand" href="/app/dashboard">
+      <span>PI</span>
+      <strong>Papelería Inteligente</strong>
+    </a>
+
+    <nav>
+      <a href="/app/dashboard">Panel</a>
+      <a href="/app/productos">Productos</a>
+      <a href="/app/ventas">Ventas</a>
+      <a href="/app/inventario">Inventario</a>
+      <a href="/app/proveedores">Proveedores</a>
+      <a href="/app/compras">Compras</a>
+      <a href="/app/reportes">Reportes</a>
+      <a href="/app/predicciones">Predicción</a>
+    </nav>
+
+    <button id="logoutBtn" class="link-button" type="button">Cerrar sesión</button>
+  </aside>
+
+  <main class="content purchases-page-content">
+    <div id="flash" class="flash"></div>
+
+    <header class="page-header purchases-header">
+      <div>
+        <span class="eyebrow">Reposición de mercancía</span>
+        <h1>Compras</h1>
+        <p>
+          Registra compras realizadas a proveedores para abastecer la papelería.
+          Cada compra aumenta el stock y genera un movimiento de entrada en inventario.
+        </p>
+      </div>
+
+      <div class="purchases-header-visual" aria-hidden="true">
+        <svg viewBox="0 0 220 170">
+          <rect x="28" y="52" width="74" height="88" rx="12" class="purchase-svg-box"></rect>
+          <path d="M28 78h74M54 52v26" class="purchase-svg-box-line"></path>
+
+          <rect x="124" y="34" width="66" height="106" rx="10" class="purchase-svg-paper"></rect>
+          <path d="M140 62h34M140 82h26M140 102h30" class="purchase-svg-line"></path>
+
+          <path d="M42 146h146" class="purchase-svg-base"></path>
+
+          <path d="M48 112h82" class="purchase-svg-arrow"></path>
+          <path d="M118 100l14 12-14 12" class="purchase-svg-arrow"></path>
+
+          <path d="M58 126l22-22 20 14 34-42 36 24" class="purchase-svg-chart"></path>
+          <circle cx="58" cy="126" r="6" class="purchase-svg-dot"></circle>
+          <circle cx="100" cy="118" r="6" class="purchase-svg-dot"></circle>
+          <circle cx="134" cy="76" r="6" class="purchase-svg-dot"></circle>
+          <circle cx="170" cy="100" r="6" class="purchase-svg-dot"></circle>
+        </svg>
+      </div>
+    </header>
+
+    <section class="purchases-summary-grid">
+      <article class="purchases-summary-card">
+        <span class="purchases-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <rect x="12" y="18" width="40" height="34" rx="6"></rect>
+            <path d="M12 30h40"></path>
+            <path d="M24 18v12"></path>
+            <path d="M24 42h16"></path>
+          </svg>
+        </span>
+
+        <div>
+          <h2>Entrada de inventario</h2>
+          <p>La mercancía comprada se suma al stock disponible de la papelería.</p>
+        </div>
+      </article>
+
+      <article class="purchases-summary-card">
+        <span class="purchases-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M14 46V22h36v24"></path>
+            <path d="M20 46a6 6 0 0 0 12 0"></path>
+            <path d="M38 46a6 6 0 0 0 12 0"></path>
+            <path d="M18 22l8-10h18l6 10"></path>
+          </svg>
+        </span>
+
+        <div>
+          <h2>Proveedor</h2>
+          <p>Cada compra queda asociada al proveedor que abastece los productos.</p>
+        </div>
+      </article>
+
+      <article class="purchases-summary-card">
+        <span class="purchases-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M16 18h32"></path>
+            <path d="M16 32h32"></path>
+            <path d="M16 46h32"></path>
+            <path d="M10 18h.1"></path>
+            <path d="M10 32h.1"></path>
+            <path d="M10 46h.1"></path>
+          </svg>
+        </span>
+
+        <div>
+          <h2>Trazabilidad</h2>
+          <p>La operación se registra como movimiento de entrada para seguimiento del stock.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="two-columns wide-left purchases-layout">
+      <article class="card purchase-form-card">
+        <div class="section-title-row">
+          <div>
+            <span class="eyebrow">Nueva operación de abastecimiento</span>
+            <h2>Nueva compra</h2>
+            <p>
+              Selecciona el proveedor, el producto, la cantidad y el precio unitario.
+              Al registrar la compra, el inventario aumenta automáticamente.
+            </p>
+          </div>
+
+          <span class="purchases-section-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <rect x="12" y="18" width="40" height="34" rx="6"></rect>
+              <path d="M12 30h40"></path>
+              <path d="M24 18v12"></path>
+              <path d="M32 42v-10"></path>
+              <path d="M26 38l6-6 6 6"></path>
+            </svg>
+          </span>
+        </div>
+
+        <form id="purchaseForm" class="form-grid purchase-form">
+          <div class="field-group">
+            <label for="purchaseSupplier">Proveedor</label>
+            <select name="proveedorId" id="purchaseSupplier" required></select>
+          </div>
+
+          <div class="field-group">
+            <label for="purchaseProduct">Producto</label>
+            <select name="productoId" id="purchaseProduct" required></select>
+          </div>
+
+          <div class="field-group">
+            <label for="cantidad">Cantidad</label>
+            <input id="cantidad" name="cantidad" type="number" min="1" value="10" required>
+          </div>
+
+          <div class="field-group">
+            <label for="precioUnitario">Precio unitario</label>
+            <input id="precioUnitario" name="precioUnitario" type="number" min="0" step="0.01" required>
+          </div>
+
+          <button class="btn primary purchase-submit" type="submit">Registrar compra</button>
+        </form>
+
+        <div class="purchase-note">
+          <strong>Diferencia clave</strong>
+          <span>Una compra aumenta el stock porque la papelería recibe mercancía del proveedor.</span>
+        </div>
+      </article>
+
+      <article class="card purchases-list-card">
+        <div class="section-title-row">
+          <div>
+            <span class="eyebrow">Historial de abastecimiento</span>
+            <h2>Últimas compras</h2>
+            <p>
+              Consulta las compras recientes realizadas para surtir productos escolares,
+              de oficina e insumos.
+            </p>
+          </div>
+
+          <span class="purchases-section-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M16 18h32"></path>
+              <path d="M16 32h32"></path>
+              <path d="M16 46h32"></path>
+              <path d="M46 18l6 6-6 6"></path>
+              <path d="M12 32h.1"></path>
+              <path d="M12 46h.1"></path>
+            </svg>
+          </span>
+        </div>
+
+        <div id="purchasesList" class="list enhanced-purchases-list"></div>
+      </article>
+    </section>
+
+  </main>
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

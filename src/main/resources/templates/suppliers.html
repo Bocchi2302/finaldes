@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proveedores · Papelería Inteligente</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body data-page="suppliers">
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <a class="brand" href="/app/dashboard">
+      <span>PI</span>
+      <strong>Papelería Inteligente</strong>
+    </a>
+
+    <nav>
+      <a href="/app/dashboard">Panel</a>
+      <a href="/app/productos">Productos</a>
+      <a href="/app/ventas">Ventas</a>
+      <a href="/app/inventario">Inventario</a>
+      <a href="/app/proveedores">Proveedores</a>
+      <a href="/app/compras">Compras</a>
+      <a href="/app/reportes">Reportes</a>
+      <a href="/app/predicciones">Predicción</a>
+    </nav>
+
+    <button id="logoutBtn" class="link-button" type="button">Cerrar sesión</button>
+  </aside>
+
+  <main class="content suppliers-page-content">
+    <div id="flash" class="flash"></div>
+
+    <header class="page-header suppliers-header">
+      <div>
+        <span class="eyebrow">Abastecimiento</span>
+        <h1>Proveedores</h1>
+        <p>
+          Gestiona la información de los proveedores que abastecen productos escolares,
+          artículos de oficina e insumos para la papelería.
+        </p>
+      </div>
+
+      <div class="suppliers-header-visual" aria-hidden="true">
+        <svg viewBox="0 0 220 170">
+          <rect x="28" y="56" width="74" height="84" rx="12" class="supplier-svg-box"></rect>
+          <path d="M28 80h74M54 56v24" class="supplier-svg-box-line"></path>
+
+          <path d="M128 48h48a12 12 0 0 1 12 12v56a12 12 0 0 1-12 12h-48a12 12 0 0 1-12-12V60a12 12 0 0 1 12-12z" class="supplier-svg-card"></path>
+          <path d="M132 76h38M132 96h28M132 116h34" class="supplier-svg-line"></path>
+
+          <path d="M40 146h146" class="supplier-svg-base"></path>
+
+          <path d="M56 116h54" class="supplier-svg-arrow"></path>
+          <path d="M100 104l12 12-12 12" class="supplier-svg-arrow"></path>
+
+          <circle cx="154" cy="38" r="15" class="supplier-svg-node"></circle>
+          <path d="M148 38h12M154 32v12" class="supplier-svg-node-line"></path>
+        </svg>
+      </div>
+    </header>
+
+    <section class="suppliers-summary-grid">
+      <article class="suppliers-summary-card">
+        <span class="suppliers-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M14 46V22h36v24"></path>
+            <path d="M20 46a6 6 0 0 0 12 0"></path>
+            <path d="M38 46a6 6 0 0 0 12 0"></path>
+            <path d="M18 22l8-10h18l6 10"></path>
+          </svg>
+        </span>
+
+        <div>
+          <h2>Abastecimiento</h2>
+          <p>Los proveedores permiten surtir productos y mantener disponibilidad en inventario.</p>
+        </div>
+      </article>
+
+      <article class="suppliers-summary-card">
+        <span class="suppliers-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <rect x="14" y="12" width="36" height="40" rx="6"></rect>
+            <path d="M22 24h20M22 34h20M22 44h12"></path>
+          </svg>
+        </span>
+
+        <div>
+          <h2>Datos de contacto</h2>
+          <p>Registra teléfono, correo y dirección para facilitar futuras compras.</p>
+        </div>
+      </article>
+
+      <article class="suppliers-summary-card">
+        <span class="suppliers-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M16 18h32"></path>
+            <path d="M16 32h32"></path>
+            <path d="M16 46h32"></path>
+            <path d="M10 18h.1"></path>
+            <path d="M10 32h.1"></path>
+            <path d="M10 46h.1"></path>
+          </svg>
+        </span>
+
+        <div>
+          <h2>Relación comercial</h2>
+          <p>Cada proveedor puede estar asociado al proceso de compras de la papelería.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="two-columns wide-left suppliers-layout">
+      <article class="card supplier-form-card">
+        <div class="section-title-row">
+          <div>
+            <span class="eyebrow">Gestión de proveedores</span>
+            <h2>Nuevo proveedor</h2>
+            <p>
+              Registra la información básica del proveedor para usarla en el módulo
+              de compras y abastecimiento.
+            </p>
+          </div>
+
+          <span class="suppliers-section-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M14 48V20h36v28"></path>
+              <path d="M20 48a6 6 0 0 0 12 0"></path>
+              <path d="M38 48a6 6 0 0 0 12 0"></path>
+              <path d="M22 20l7-10h14l7 10"></path>
+              <path d="M26 32h12"></path>
+            </svg>
+          </span>
+        </div>
+
+        <form id="supplierForm" class="form-grid supplier-form">
+          <div class="field-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" required placeholder="Ej. Distribuidora Escolar del Meta">
+          </div>
+
+          <div class="field-group">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" placeholder="Ej. 3200000000">
+          </div>
+
+          <div class="field-group">
+            <label for="correo">Correo</label>
+            <input id="correo" name="correo" type="email" placeholder="proveedor@correo.com">
+          </div>
+
+          <div class="field-group">
+            <label for="direccion">Dirección</label>
+            <input id="direccion" name="direccion" placeholder="Dirección comercial del proveedor">
+          </div>
+
+          <button class="btn primary supplier-submit" type="submit">Guardar proveedor</button>
+        </form>
+
+        <div class="supplier-note">
+          <strong>Uso dentro del sistema</strong>
+          <span>
+            Los proveedores registrados se utilizan al crear compras, permitiendo controlar
+            de dónde entra la mercancía al inventario.
+          </span>
+        </div>
+      </article>
+
+      <article class="card suppliers-list-card">
+        <div class="section-title-row">
+          <div>
+            <span class="eyebrow">Directorio de abastecimiento</span>
+            <h2>Listado</h2>
+            <p>
+              Consulta los proveedores disponibles para realizar compras y mantener
+              surtido el catálogo de productos.
+            </p>
+          </div>
+
+          <span class="suppliers-section-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M16 18h32"></path>
+              <path d="M16 32h32"></path>
+              <path d="M16 46h32"></path>
+              <path d="M10 18h.1"></path>
+              <path d="M10 32h.1"></path>
+              <path d="M10 46h.1"></path>
+            </svg>
+          </span>
+        </div>
+
+        <div id="suppliersList" class="list enhanced-suppliers-list"></div>
+      </article>
+    </section>
+
+  </main>
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>
