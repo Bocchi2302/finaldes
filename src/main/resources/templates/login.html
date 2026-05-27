@@ -1,29 +1,129 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ingresar · Inventario y Ventas</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresar · Papelería Inteligente</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body>
-<main class="auth-page">
-    <section class="auth-card">
+
+<body data-page="login" class="auth-page">
+
+<main class="auth-layout">
+
+  <section class="auth-brand-panel">
+    <div class="auth-brand-content">
+      <span class="eyebrow">Acceso seguro</span>
+
+      <h1>Papelería Inteligente</h1>
+
+      <p>
+        Administra ventas, compras, inventario, proveedores, reportes y predicción de demanda
+        desde una sola plataforma.
+      </p>
+
+      <div class="auth-illustration" aria-hidden="true">
+        <svg viewBox="0 0 420 300">
+          <rect x="62" y="46" width="210" height="168" rx="18" class="svg-paper"></rect>
+          <path d="M92 86h112M92 118h148M92 150h126" class="svg-line"></path>
+
+          <rect x="238" y="86" width="88" height="132" rx="14" class="svg-book"></rect>
+          <path d="M262 86v132" class="svg-book-line"></path>
+          <path d="M282 118h24M282 144h20" class="svg-light-line"></path>
+
+          <path d="M120 236l28-28 24 24 78-78 34 34" class="svg-chart"></path>
+          <circle cx="120" cy="236" r="7" class="svg-dot"></circle>
+          <circle cx="172" cy="232" r="7" class="svg-dot"></circle>
+          <circle cx="250" cy="154" r="7" class="svg-dot"></circle>
+          <circle cx="284" cy="188" r="7" class="svg-dot"></circle>
+
+          <path d="M330 58l28 28-94 94-34 8 8-34z" class="svg-pencil"></path>
+          <path d="M330 58l28 28" class="svg-pencil-line"></path>
+        </svg>
+      </div>
+
+      <div class="auth-points">
         <div>
-            <span class="eyebrow">Acceso</span>
-            <h1>Iniciar sesión</h1>
-            <p>Entra al panel para administrar productos, ventas e inventario.</p>
+          <span class="point-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 12l4 4L19 6"></path>
+            </svg>
+          </span>
+          <span>Control de stock en tiempo real</span>
         </div>
-        <form id="loginForm" class="form-card">
-            <label>Correo</label>
-            <input type="email" name="email" placeholder="admin@inventario.com" required>
-            <label>Contraseña</label>
-            <input type="password" name="password" placeholder="Admin123*" required>
-            <button class="btn primary full" type="submit">Entrar</button>
-            <p class="muted center">Demo: admin@inventario.com / Admin123*</p>
-        </form>
-    </section>
+
+        <div>
+          <span class="point-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7h16M4 12h16M4 17h10"></path>
+            </svg>
+          </span>
+          <span>Reportes para la toma de decisiones</span>
+        </div>
+
+        <div>
+          <span class="point-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 18l5-5 4 4 7-9"></path>
+              <path d="M15 8h5v5"></path>
+            </svg>
+          </span>
+          <span>Predicción de demanda por producto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="auth-card">
+    <div class="auth-card-header">
+      <span class="login-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <rect x="14" y="28" width="36" height="24" rx="6"></rect>
+          <path d="M22 28v-8a10 10 0 0 1 20 0v8"></path>
+          <path d="M32 38v6"></path>
+        </svg>
+      </span>
+
+      <div>
+        <span class="eyebrow">Panel administrativo</span>
+        <h2>Iniciar sesión</h2>
+        <p>Ingresa con las credenciales del dump o los usuarios iniciales.</p>
+      </div>
+    </div>
+
+    <form id="loginForm" class="form-grid login-form">
+      <div class="field-group">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" name="correo" type="email" value="admin@papeleria.com" required>
+      </div>
+
+      <div class="field-group">
+        <label for="password">Contraseña</label>
+        <input id="password" name="password" type="password" value="Admin123*" required>
+      </div>
+
+      <button class="btn primary full" type="submit">Entrar al sistema</button>
+    </form>
+
+    <div class="demo-users">
+      <p class="demo-title">Usuarios de prueba</p>
+
+      <div class="demo-user">
+        <span>Administrador</span>
+        <strong>admin@papeleria.com / Admin123*</strong>
+      </div>
+
+      <div class="demo-user">
+        <span>Empleado</span>
+        <strong>empleado@papeleria.com / Empleado123*</strong>
+      </div>
+    </div>
+
+    <div id="flash" class="flash"></div>
+  </section>
+
 </main>
+
 <script th:src="@{/js/app.js}"></script>
 </body>
 </html>
